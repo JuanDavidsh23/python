@@ -3,7 +3,7 @@ frutas = ["manzana", "banana", "naranja", "uva", "fresa"]
 for fruta in frutas:
     print(fruta)
 
-""" --------------------------------------- """
+# --------------------------------------- """
 
 print("agregar y eliminar frutas a la lista")
 frutas = ["manzana", "banana", "naranja"]
@@ -13,7 +13,7 @@ print("Después de agregar uva:", frutas)
 frutas.remove("banana")
 print("Después de eliminar banana:", frutas)     
 
-""" --------------------------------------- """
+# --------------------------------------- """
 
 print("buscar fruta en la lista")
 frutas = ["manzana", "banana", "naranja", "uva", "fresa"]
@@ -23,7 +23,7 @@ if fruta_buscada in frutas:
 else:
     print(f"{fruta_buscada} no está en la lista.") 
     
-""" --------------------------------------- """
+# --------------------------------------- """
 
 print("lista de numeros y promedio")
 numeros = [10, 20, 30, 40, 50]
@@ -31,7 +31,7 @@ print("Lista de números:", numeros)
 promedio = sum(numeros) / len(numeros)
 print("Promedio:", promedio)
 
-""" --------------------------------------- """
+# --------------------------------------- """
 
 print("Guardar los numeros pares que ingrese un usuario en una lista hasta que ingrese un número impar")
 numeros_pares = []

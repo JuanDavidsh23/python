@@ -1,2 +1,1 @@
-print("sistema de calificacione")
-
+sndgndkjnbnjklnbjzbnbznjkbnzjkbnz

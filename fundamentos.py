@@ -1,22 +1,23 @@
         
 
-print("MENU DE OPCIONES: ")
-print("1.Hola usuario: pide al usuario su nombre y edad. Luego imprime un mensaje: \n")
-
-print("2.Suma de dos números.\n")
-
-print("3.Area del triangulo\n")
-
-print("4.Conversor de grados Celsius a Fahrenheit.\n")
-
-print("5.Tipo de dato: usar type() para mostrar el tipo de cada variable.\n")
-
-print("6.Edad futura \n")
-
-print("7.Salir")
-
 
 while True:
+
+    print("MENU DE OPCIONES: ")
+    print("1.Hola usuario: pide al usuario su nombre y edad. Luego imprime un mensaje: \n")
+
+    print("2.Suma de dos números.\n")
+
+    print("3.Area del triangulo\n")
+
+    print("4.Conversor de grados Celsius a Fahrenheit.\n")
+
+    print("5.Tipo de dato: usar type() para mostrar el tipo de cada variable.\n")
+
+    print("6.Edad futura \n")
+
+    print("7.Salir")
+
 
     opt = int(input("INGRESE UNA OPCION DEL MENU: "))
 

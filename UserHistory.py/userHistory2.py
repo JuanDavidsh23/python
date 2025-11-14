@@ -22,30 +22,7 @@ while True:
 
 
 
-sumar = lambda a,b : a + b
-print(sumar(2,3))
 
 
 
 
-
-
-def suma (a , b):
-    return a + b
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-suma(12 , 10)

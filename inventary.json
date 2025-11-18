@@ -1,0 +1,18 @@
+{
+    "pan": {
+        "price": 2000,
+        "quantity": 5
+    },
+    "yuca": {
+        "price": 2000,
+        "quantity": 2
+    },
+    "limon": {
+        "price": 500,
+        "quantity": 3
+    },
+    "papa": {
+        "price": 2250,
+        "quantity": 2
+    }
+}

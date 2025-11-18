@@ -48,7 +48,7 @@ while True:
     while True: 
         try:
             Opt = int(input("Ingrese la opcion que desea ejecutar: "))
-            if Opt < 0 and Opt > 4:
+            if (Opt < 0) or (Opt > 4):
                 print("Ingrese un numero del menu")
             break
         except ValueError:
@@ -165,6 +165,6 @@ while True:
                     estado = "Completada" if tarea["success"] else "Incompleta"
                     print(f"{i+1}. {tarea["title"]} - {estado}")
 
-
-
-                
+    if Opt == 4:
+        print("Bienvenido a la maquina espendedora")
+        print("1. Agua 1$")

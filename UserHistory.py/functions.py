@@ -1,5 +1,9 @@
-
+from colorama import init, Fore, Back, Style
+init(autoreset=True)
 import time
+import random
+colores = [Fore.RED, Fore.GREEN, Fore.BLUE, Fore.YELLOW, Fore.MAGENTA, Fore.CYAN, Fore.WHITE]
+color_aleatorio = random.choice(colores)
 inventory = {}
 productsCount  = 0
 priceCount = 0
@@ -46,9 +50,9 @@ def addProducts():
 
 
 def showProducts():
-            print("    Cargando productos..", end="")
+            print(color_aleatorio +"       Cargando productos..", end="")
             for i in range(1,101):
-                print(f"\r{i}%" , end = " " )
+                print(color_aleatorio + f"\r{i}%" , end = " " )
                 time.sleep(0.02)
             print()
 

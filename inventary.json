@@ -1,18 +1,14 @@
 {
     "pan": {
+        "price": 20000,
+        "quantity": 2
+    },
+    "arroz ": {
         "price": 2000,
         "quantity": 2
     },
-    "yuca": {
-        "price": 2000,
-        "quantity": 2
-    },
-    "limon": {
-        "price": 500,
-        "quantity": 3
-    },
-    "papa": {
-        "price": 2250,
+    "carne ": {
+        "price": 5000,
         "quantity": 2
     }
 }

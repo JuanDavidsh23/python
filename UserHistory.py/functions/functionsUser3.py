@@ -2,6 +2,8 @@ import csv
 import json 
 file = "inventary.json"
 
+total = 0
+
 def inicializar():
     try: 
         with open (file, "r") as f:
@@ -13,15 +15,18 @@ def savee (data):
     with open(file, "w") as f:
         json.dump(data,f, indent = 4)
 
-def CreateProduct(name,price,quantity):
+def CreateProduct(id, name,price,quantity):
     data = inicializar()
-    data[name] = {"price" : price , "quantity": quantity}
+    data[id] = {"name" : name, "price" : price , "quantity": quantity}
     savee(data)
     print("Producto creado.")
 
 
 def read():
     data = inicializar()
+    if not data:
+        print("NO hay nada dentro")
+
     for name, info in data.items():
         print(name,info)
 
@@ -30,15 +35,19 @@ def Search(name):
     for key,info in data.items():
         if key == name:
             print(name,info)
+        else:
+            print("NO hay")
 
-
-def update(name, price = None, quantity = None):
+def update(id, name = None, price = None, quantity = None):
     data = inicializar()
-    if name in data:
+    id = str(id)
+    if id in data:
+        if name:
+            data[id]["name"] = name
         if price:
-            data[name]["price"] = price
+            data[id]["price"] = price
         if quantity:
-            data[name]["quantity"] = quantity
+            data[id]["quantity"] = quantity
         savee(data)
         print("Producto actualizado.")
     else:
@@ -67,35 +76,35 @@ def Stadistic():
 
 
 
-def saveCsv(ruta, inventario_actual=None):
+def saveCsv(ruta, data=None):
     """
     Carga productos desde un CSV y devuelve una lista/dict compatible con el inventario.
     
     Parámetros:
     - ruta: ruta del archivo CSV a cargar
-    - inventario_actual: inventario existente (dict) para fusionar si se elige
+    - data: inventario existente (dict) para fusionar si se elige
     """
     
-    if inventario_actual is None:
-        inventario_actual = {}
+    if data is None:
+        data = {}
 
     productos_cargados = {}
     filas_invalidas = 0
 
     try:
-        with open(ruta, "r", newline="", encoding="utf-8") as archivo:
+        with open("UserHistory.py/functions/files/inventario.csv", "r", newline="", encoding="utf-8") as archivo:
             lector = csv.reader(archivo, delimiter=",")
             filas = list(lector)
 
             if not filas:
                 print("El archivo CSV está vacío.")
-                return inventario_actual
+                return data
 
             # Validar encabezado
             header = filas[0]
             if [h.lower() for h in header] != ["nombre", "precio", "cantidad"]:
                 print(f"Encabezado inválido. Se esperaba: nombre,precio,cantidad")
-                return inventario_actual
+                return data
 
             # Procesar filas
             for i, fila in enumerate(filas[1:], start=2):
@@ -118,13 +127,13 @@ def saveCsv(ruta, inventario_actual=None):
 
     except FileNotFoundError:
         print(f"Error: Archivo no encontrado en {ruta}")
-        return inventario_actual
+        return data
     except UnicodeDecodeError:
         print(f"Error: El archivo {ruta} tiene un encoding inválido")
-        return inventario_actual
+        return data
     except Exception as e:
         print(f"Ocurrió un error inesperado: {e}")
-        return inventario_actual
+        return data
 
     # Preguntar al usuario si sobrescribir o fusionar
     if productos_cargados:
@@ -135,19 +144,19 @@ def saveCsv(ruta, inventario_actual=None):
             print("Respuesta inválida. Ingrese S o N.")
 
         if opcion == "S":
-            inventario_actual = productos_cargados
+            data = productos_cargados
             accion = "Reemplazo del inventario actual"
         else:
             # Política de fusión:
             # - Si el producto ya existe, sumamos cantidad
             # - Si el precio difiere, actualizamos al nuevo precio
             for nombre, info in productos_cargados.items():
-                if nombre in inventario_actual:
-                    inventario_actual[nombre]["quantity"] += info["quantity"]
-                    if inventario_actual[nombre]["price"] != info["price"]:
-                        inventario_actual[nombre]["price"] = info["price"]
+                if nombre in data:
+                    data[nombre]["quantity"] += info["quantity"]
+                    if data[nombre]["price"] != info["price"]:
+                        data[nombre]["price"] = info["price"]
                 else:
-                    inventario_actual[nombre] = info
+                    data[nombre] = info
             accion = "Fusión con inventario existente"
 
         print(f"\nResumen de carga:")
@@ -158,7 +167,7 @@ def saveCsv(ruta, inventario_actual=None):
     else:
         print("No se cargaron productos válidos desde el CSV.")
 
-    return inventario_actual
+    return data
 
 
 

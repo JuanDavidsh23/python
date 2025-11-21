@@ -1,14 +1,18 @@
 {
-    "pan": {
-        "price": 20000,
-        "quantity": 2
+    "1": {
+        "Nombre": "gorra",
+        "Marca": "nike",
+        "Categoria": "ropa",
+        "Precio c/u": 10000.0,
+        "Cantidad": 2,
+        "Garantia": 6
     },
-    "arroz ": {
-        "price": 2000,
-        "quantity": 2
-    },
-    "carne ": {
-        "price": 5000,
-        "quantity": 2
+    "2": {
+        "Nombre": "Zapatos",
+        "Marca": "Adidas",
+        "Categoria": "Ropa",
+        "Precio c/u": 150000.0,
+        "Cantidad": 6,
+        "Garantia": 3
     }
 }

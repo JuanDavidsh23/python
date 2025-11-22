@@ -1,4 +1,4 @@
-from functions import ShowMenu, validateOption, showProducts, addProducts, stadistics
+from functions.functionsUser2 import ShowMenu, validateOption, showProducts, addProducts, stadistics
 
 
 

@@ -1,10 +1,16 @@
 from colorama import init, Fore, Back, Style
-from functionsUser3 import CreateProduct, read, Search, update, deletee, Stadistic
+from functions.functionsUser3 import CreateProduct, read, Search, update, deletee, Stadistic, saveCsv, inicializar
 
 while True:
-    print(Fore.RED + " 1.Add product \n 2.Show Products \n 3.Search Products \n 4.Update Product \n 5.Delete Product \n 6.Stadistisc \n 7.Save as CSV")
+    print(Fore.RED + " 1.Add product \n 2.Show Products \n 3.Search Products \n 4.Update Product \n 5.Delete Product \n 6.Stadistisc \n 7.Save as CSV \n 8.Load Csv")
 
-    opt = int(input("Choose a option: "))
+    while True: 
+        try:
+            opt = int(input("Choose a option: "))
+            break
+        except ValueError:
+            print("Error, el valor debe ser numerico.")
+
     if opt == 1:
         global countPrice, countQuantity
         countPrice = 0
@@ -36,12 +42,13 @@ while True:
     elif opt == 6:
         Stadistic()
     
-    elif opt == 7:
-        print("Save as CSV")
 
-     
+    elif opt == 7:  # suponiendo opción de cargar CSV
+            ruta_csv = "UserHistory.py/functions/files/inventario.csv"
+            inventario_actual = saveCsv(ruta_csv, inventario_actual=inicializar())
 
+            
 
-    
+            
             
 

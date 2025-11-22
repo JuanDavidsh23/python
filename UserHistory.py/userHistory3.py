@@ -2,7 +2,7 @@ from colorama import init, Fore, Back, Style
 from functions.functionsUser3 import CreateProduct, read, Search, update, deletee, Stadistic, saveCsv, inicializar
 
 while True:
-    print(Fore.RED + " 1.Add product \n 2.Show Products \n 3.Search Products \n 4.Update Product \n 5.Delete Product \n 6.Stadistisc \n 7.Save as CSV \n 8.Load Csv")
+    print(Fore.LIGHTMAGENTA_EX + " 1.Add product \n 2.Show Products \n 3.Search Products \n 4.Update Product \n 5.Delete Product \n 6.Stadistisc \n 7.Save as CSV \n 8.Load Csv")
 
     while True: 
         try:
@@ -15,12 +15,13 @@ while True:
         global countPrice, countQuantity
         countPrice = 0
         countQuantity = 0
+        id = int(input("INgrese el id "))
         name = input("INgrese el nombre: ")
         price = int(input("INgrese  un precio: "))
         countPrice += price
         quantity = int(input("INgrese  una cantidad: "))
         countQuantity += quantity
-        CreateProduct(name, price, quantity)
+        CreateProduct(id,name, price, quantity)
     
     elif opt == 2: 
         read()
@@ -30,10 +31,11 @@ while True:
         Search(name)
     
     elif opt == 4:
+        id = int(input("INgrese el id "))
         name = input("INgrese el nombre: ")
         price = int(input("INgrese  un precio: "))
         quantity = int(input("INgrese  una cantidad: "))
-        update(name,price,quantity)
+        update(id, name,price,quantity)
 
     elif opt == 5:
         name = input("INgrese el nombre: ")
@@ -45,7 +47,7 @@ while True:
 
     elif opt == 7:  # suponiendo opción de cargar CSV
             ruta_csv = "UserHistory.py/functions/files/inventario.csv"
-            inventario_actual = saveCsv(ruta_csv, inventario_actual=inicializar())
+            inventario_actual = saveCsv(ruta_csv, data=inicializar())
 
             
 

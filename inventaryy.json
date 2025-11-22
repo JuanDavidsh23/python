@@ -1,0 +1,17 @@
+{
+    "1": {
+        "name": "papa",
+        "price": 2.0,
+        "quantity": 2
+    },
+    "2": {
+        "name": "yucas",
+        "price": 3.0,
+        "quantity": 2
+    },
+    "3": {
+        "name": "salchi",
+        "price": 20000,
+        "quantity": 2
+    }
+}

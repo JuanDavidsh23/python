@@ -1,5 +1,5 @@
 
-from functions.functionsUser3 import CreateProduct, read, Search, update, deletee, Stadistic, saveCsv, cargarCsv
+from functions.functionsUser3 import CreateProduct, read, Search, update,validaString, deletee, validateDates , Stadistic, saveCsv, cargarCsv
 
 while True:
     print( " 1.Añadir Productos \n 2.Mostrar productos \n 3.Buscar Productos \n 4.Actualizar Productos \n 5.Eliminar  Productos \n 6.Estadistiscas \n 7.Guardar como CSV \n 8.Cargar desde Csv")
@@ -17,26 +17,28 @@ while True:
         global countPrice, countQuantity
         countPrice = 0
         countQuantity = 0
-        id = int(input("INgrese el id: "))
-        name = input("INgrese el nombre: ")
-        price = int(input("INgrese  un precio: "))
+
+        name = validaString("Ingrese el nombre del producto: ")
+
+        price = validateDates("Ingrese el precio: ", int)
         countPrice += price
-        quantity = int(input("INgrese  una cantidad: "))
+
+        quantity = validateDates("Ingrese la cantidad: ")
         countQuantity += quantity
-        CreateProduct(id,name, price, quantity)
+        CreateProduct(name, price, quantity)
     
     elif opt == 2: 
         read()
     
     elif opt == 3:
-        name = input("INgrese el nombre: ")
+        name = validaString("INgrese el nombre: ")
         Search(name)
     
     elif opt == 4:
-        id = int(input("INgrese el id "))
-        name = input("INgrese el nombre: ")
-        price = int(input("INgrese  un precio: "))
-        quantity = int(input("INgrese  una cantidad: "))
+        id = validateDates("Ingrese el id del producto: ",int)
+        name = validaString("INgrese el nombre: ")
+        price = validateDates("Ingrese el precio actualizado del producto: ",int)
+        quantity = validateDates("Ingrese la cantidad actualizada del producto: ",int)
         update(id, name,price,quantity)
 
     elif opt == 5:
@@ -47,7 +49,7 @@ while True:
         Stadistic()
     
 
-    elif opt == 7:  # suponiendo opción de cargar CSV
+    elif opt == 7:  
             ruta = "USERHISTORY/functions/files/inventario.csv"
             saveCsv(ruta)
 

@@ -5,6 +5,23 @@ file = "inventaryy.json"
 
 total = 0
 
+def validaString(mensaje):
+    while True:
+        nombre = input(mensaje).strip()
+        
+        if nombre.replace(" ", "").isalpha():
+            return nombre
+        else:
+            print("El nombre no puede contener números ni caracteres especiales.")
+
+
+def validateDates(mensaje, tipo = int):
+    while True:
+        try:
+            return tipo(input(mensaje))
+        except ValueError:
+            print(f"Error, debe ingresar:{tipo.__name__} ")
+
 def inicializar():
     try: 
         with open (file, "r") as f:
@@ -16,11 +33,25 @@ def savee (data):
     with open(file, "w") as f:
         json.dump(data,f, indent = 4)
 
-def CreateProduct(id, name,price,quantity):
+def generar_id(data):
+    next_id = max([int(k) for k in data.keys()], default=0) + 1
+    return str(next_id)
+
+def CreateProduct(name, price, quantity):
     data = inicializar()
-    data[id] = {"name" : name, "price" : price , "quantity": quantity}
+
+    new_id = generar_id(data)
+
+    data[new_id] = {
+        "name": name,
+        "price": price,
+        "quantity": quantity
+    }
+
     savee(data)
-    print("Producto creado.")
+
+    print(f"Producto creado con ID: {new_id}")
+
 
 
 def read():
@@ -29,14 +60,15 @@ def read():
         print("NO hay nada dentro")
 
     for name, info in data.items():
-        print(name,info)
+            print(f"\n {name}. producto: {info['name']} Precio: {info['price']} Cantidad: {info['quantity']} \n")
+
 
 def Search(name):
     data = inicializar()
     found = False
     for key,info in data.items():
         if info["name"].lower() == name.lower():
-            print(f"Producto encontrado: {info}")
+            print(f"\n {key}. producto: {info['name']} Precio: {info['price']} Cantidad: {info['quantity']} \n")
             found = True
     if not found:
             print("NO hay")

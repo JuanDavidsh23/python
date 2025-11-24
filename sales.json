@@ -16,5 +16,32 @@
         "discount": 50,
         "total": -882000,
         "date": "11:47:25"
+    },
+    "3": {
+        "client": "javier",
+        "author": "andres",
+        "price": 20000,
+        "quantity": 10,
+        "discount": 0,
+        "total": 200000,
+        "date": "11:56:49"
+    },
+    "4": {
+        "client": "jacinto",
+        "author": "andres",
+        "price": 20000,
+        "quantity": 9,
+        "discount": 0,
+        "total": 180000,
+        "date": "11:57:21"
+    },
+    "5": {
+        "client": "santiago",
+        "author": "blazz",
+        "price": 2000,
+        "quantity": 2,
+        "discount": 0,
+        "total": 4000,
+        "date": "12:06:57"
     }
 }

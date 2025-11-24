@@ -1,18 +1,15 @@
-from functions import validaString, validateDates , showProduct, addProducts
+from functions import validaString, validateDates ,registerSale, CreateProduct, read, updateProduct, deleteProduct, readSales
+import time 
 print("-----------------------------------------------")
 print("BIENVENIDO AL SISTEMA DE INVENTARIO Y VENTAS")
 print("-----------------------------------------------")
 
-Products = [{
-    "nombre":"",
-    "":"",
-    "":"",
-    "":""
-}]
 
 while True: 
+    print("-------------------------------------------------------------------------")
     print("Menu Principal")
     print(" 1.Gestion del inventario \n 2.Gestion de ventas \n 3.Reportes \n 4.Salir")
+    print("-------------------------------------------------------------------------")
     try: 
         option = int(input("Ingrese una opcion del menu: "))
         if option <1 or option >4:
@@ -26,7 +23,7 @@ while True:
             print(" 1.Registrar un producto \n 2.Consultar productos \n 3.Actualizar producto \n 4.Eliminar un producto \n 5.Volver al menu principal")
             try:
                 option2 = int(input("Ingrese una opcion del menu: "))
-                if option < 1 or option2 >5:
+                if option2 < 1 or option2 >5:
                     print("Error, el valor de la opcion debe estar entre 1 y 5.")
             except ValueError:
                 print("El dato deber ser numerico, no puedes ingresar texto.")
@@ -38,21 +35,69 @@ while True:
                 category = validaString("Ingrese la categoria:")
                 price = validateDates("Ingrese el precio del producto: ", int)
                 quantity = validateDates("Ingrese la cantidad stock: ", int)
-                addProducts(title, author,category,price,quantity)
+                CreateProduct(title, author,category,price,quantity)
                 print("Producto registrado correctamente. ")
 
             elif option2 == 2: 
-                showProduct()
+                read()
 
             elif option2 == 3:
-                print("Actualice su producto")
-                oldName = validaString("Ingrese el nombre actual del producto: ").lower().strip()
-                newTitle = validaString("Ingrese el titulo nuevo de su producto: ")
-                newAuthor = validaString("Ingrese el nombre del autor: ")
-                newCategory = validaString("Ingrese la categoria:")
-                newPrice = validateDates("Ingrese el precio del producto: ", int)
-                newQuantity = validateDates("Ingrese la cantidad stock: ", int)
-                addProducts(oldName,newTitle, newAuthor,newCategory,newPrice,newQuantity)
-                print("Producto actualizado.")
+                print("Actualice su producto.")
+                id = validateDates("Ingrese el id del libro: ")
+                title = validaString("Ingrese el titulo de su producto: ")
+                author = validaString("Ingrese el nombre del autor: ")
+                category = validaString("Ingrese la categoria:")
+                price = validateDates("Ingrese el precio del producto: ", int)
+                quantity = validateDates("Ingrese la cantidad stock: ")
+                updateProduct(id, title, author,category,price,quantity)
+            
+
+            elif option2 == 4:
+                id = input("INgrese el id del producto: ")
+                deleteProduct(id)
+
+            elif option2 == 5:
+                print("-----------------------------")
+                print("Volviendo al menu anterior...")
+                print("-----------------------------")
+
+                break
+
+    elif option == 2:
+        while True:
+            print("Gestion de ventas")
+            print(" 1.Registrar una venta \n 2.Consultar productos \n 3.Volver al menu principal")
+            try:
+                option3 = int(input("Ingrese una opcion del menu: "))
+                if option3 < 1 or option3 >3:
+                    print("Error, el valor de la opcion debe estar entre 1 y 3.")
+            except ValueError:
+                print("El dato deber ser numerico, no puedes ingresar texto.")
+        
+            if option3 == 1:
+                totalSales = 0
+                read()             
+                print("LOS CUPONES DE DESCUENTO SON: REWARD Y REWARD50")
+                id = validateDates("Ingrese el id del producto: ")
+                current_time = time.strftime("%H:%M:%S")
+                client = validaString("Ingrese el nombre del cliente: ")
+                quantity = validateDates("Ingrese la cantidad: ") 
+                date =  current_time
+                discount = validaString("El cliente tiene cupon de descuento: ")  
+                registerSale(id, client,quantity, date, discount)
+
+            elif option3 == 2:
+                readSales()
+            
+            elif option3 == 3:
+                print("-----------------------------")
+                print("Volviendo al menu anterior...")
+                print("-----------------------------")
+                break
+    elif option == 3:
+        while True:
+            print("Reportes y/o estadisticas")
+            print(" 1.Mostrar top 3 Mas vendidos \n 2.")
+
 
 

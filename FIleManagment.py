@@ -20,5 +20,5 @@ with open ("python/UserHistory.py/frutasa/frutas.txt","r") as file:
         if frase in i:
             print(i)
 
-
+lambda x: x ** 2
 

@@ -1,7 +1,7 @@
 import json 
 
 file = "inventary.json"
-ClientsFile = "client.json"
+saleFile = "sales.json"
 
 def validaString(mensaje):
     while True:
@@ -27,20 +27,20 @@ def inicializar():
     except FileNotFoundError:
         return{}
     
-def savee (data):
+def savee2 (data):
     with open(file, "w") as f:
         json.dump(data,f, indent = 4)
 
 
 def inicializarClient():
     try: 
-        with open (ClientsFile, "r") as f:
+        with open (saleFile, "r") as f:
             return json.load(f)
     except FileNotFoundError:
         return{}
 
 def savee (data2):
-    with open(ClientsFile, "w") as f:
+    with open(saleFile, "w") as f:
         json.dump(data2,f, indent = 4)
 
 
@@ -63,7 +63,7 @@ def CreateProduct(tittle, author, category,price, quantity):
         "quantity": quantity
     }
     print(f"Producto creado con ID: {new_id}")
-    savee(data)
+    savee2(data)
 
 def read():
     data = inicializar()
@@ -87,7 +87,7 @@ def updateProduct(id, title = None, author = None, category = None ,price = None
             data[id]["price"] = price
         if quantity:
             data[id]["quantity"] = quantity
-        savee(data)
+        savee2(data)
         print("Producto actualizado.")
     else:
         print("Producto no encontrado.")
@@ -96,7 +96,7 @@ def deleteProduct(id):
     data = inicializar()
     if id in data: 
         del data[id]
-        savee(data)
+        savee2(data)
         print("Producto eliminado. ")
     else:
         print("no se encuentra el producto.")
@@ -109,34 +109,41 @@ def generar_id(data2):
 
 
 
-def registerSale(id, client, quantity, date ,discount  ):
+def registerSale(id, client, quantity, date, discount):
     data2 = inicializarClient()
     data = inicializar()
     found = False
-    for key,info in data.items():
-        id = str(id)
-        if id == key:
-
+    id = str(id)
+    
+    if id in data:
+        if quantity <= data[id]["quantity"]:
             new_id = generar_id(data2)
-
-            for key,value in data.items():
-                author = value['author']
-                price = value['price']
-                if quantity < value['quantity'] :
-                    data2[new_id] = {
-                    "client": client,
-                    "author": author,
-                    "price": price,
-                    "quantity": quantity,
-                    "discount" : discount,
-                    "date":date
-                    }
-                    print(f"Venta registrada con ID: {new_id}") 
-                    savee(data2)
-                    found = True
-                else: 
-                    print("Lo sentimos el stock es insuficiente.")
-
+            author = data[id]['author']
+            price = data[id]['price']
+            total = quantity * price * (1 - discount)
+            
+            data2[new_id] = {
+                "client": client,
+                "author": author,
+                "price": price,
+                "quantity": quantity,
+                "discount": discount,
+                "total": total,
+                "date": date
+            }
+            
+            data[id]["quantity"] -= quantity
+            
+            savee2(data)  
+            savee(data2)   
+            print(f"Venta registrada con ID: {new_id}")
+            found = True
+        else:
+            print("Lo sentimos, el stock es insuficiente.")
+    else:
+        print("Producto no encontrado.")
+    
+    return found   
     if not found:
             print("No hay libros con ese id.")
 
@@ -148,8 +155,28 @@ def readSales():
     for key, info in data2.items():
             print(f"\n {key}. cliente: {info['client']} Autor: {info['author']} Precio: {info['price']} Cantidad: {info['quantity']} Descuento: {info['discount']} Fecha: {info['date']}")
 
-
-
+def mostSales():
+    data2 = inicializarClient()
+    sales_by_author = {}
+    countPrice = 0
+    countQuantity = 0
+    countDiscount = 0
+    for key, value in data2.items():
+        countPrice += value['price']
+        countQuantity += value['quantity']
+        countDiscount += value['discount']
+        author = value['author']
+        sales_by_author[author] = sales_by_author.get(author, 0) + value['quantity']
+    
+    print("Ventas por autor")
+    for author, total in sales_by_author.items():
+        print(f"Autor: {author} vendio: {total}")   
+    print("-------------------------------------------------------------------------")
+    print(f"La cantidad de ventas totales son: {countQuantity} y el dinero obtenido es de: {countQuantity * countPrice - countDiscount}")
+    print("-------------------------------------------------------------------------")
 
 
     
+
+
+

@@ -1,4 +1,4 @@
-from functions import validaString, validateDates ,registerSale, CreateProduct, read, updateProduct, deleteProduct, readSales
+from functions import validaString, validateDates ,registerSale, CreateProduct, read, updateProduct, deleteProduct, readSales, mostSales
 import time 
 print("-----------------------------------------------")
 print("BIENVENIDO AL SISTEMA DE INVENTARIO Y VENTAS")
@@ -83,7 +83,7 @@ while True:
                 client = validaString("Ingrese el nombre del cliente: ")
                 quantity = validateDates("Ingrese la cantidad: ") 
                 date =  current_time
-                discount = validaString("El cliente tiene cupon de descuento: ")  
+                discount = validateDates("Ingrese el valor del descuento: ",int)  
                 registerSale(id, client,quantity, date, discount)
 
             elif option3 == 2:
@@ -97,7 +97,18 @@ while True:
     elif option == 3:
         while True:
             print("Reportes y/o estadisticas")
-            print(" 1.Mostrar top 3 Mas vendidos \n 2.")
+            print(" 1.Reporte completo \n 2.Volver al menu principal")
+            try:
+                option4 = int(input("Ingrese una opcion del menu: "))
+                if option4 < 1 or option4 >2:
+                    print("Error, el valor de la opcion debe estar entre 1 y 2.")
+            except ValueError:
+                print("El dato deber ser numerico, no puedes ingresar texto.")
 
+            if option4 == 1:
+                mostSales()
+            elif option4 == 2:
+                print("Volviendo al menu anterior...")
+                break
 
 
